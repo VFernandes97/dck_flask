@@ -1,0 +1,14 @@
+FROM python:3.12.0b4-alpine3.18
+
+EXPOSE 5010
+
+WORKDIR /flask_app
+
+RUN pip install requests flask && apk add curl
+
+COPY app.py .
+
+HEALTHCHECK CMD \
+  curl -sf localhost:5010/health || exit 1
+
+CMD ["flask", "run", "--host", "0.0.0.0", "-p", "5010"]

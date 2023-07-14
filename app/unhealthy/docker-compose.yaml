@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  flask-app:
+    build:
+      context: .
+      dockerfile: Dockerfile.python
+    image: flask-app:unhealthy  
+    container_name: flask-app-unhealthy
+    environment:
+      - PORT=5010
+    ports:
+      - "5055:5010"
